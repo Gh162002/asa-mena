@@ -1,0 +1,117 @@
+.groupes-intro {
+  max-width: 780px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+.groupes-intro p {
+  color: var(--texte-clair);
+  font-size: 16px;
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.groupes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 28px;
+}
+
+.groupe-card {
+  background: var(--blanc);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.groupe-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.groupe-header {
+  padding: 28px 28px 20px;
+  border-left: 5px solid;
+}
+
+.groupe-icon { font-size: 36px; display: block; margin-bottom: 8px; }
+
+.groupe-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texte-clair);
+  margin-bottom: 4px;
+}
+
+.groupe-header h2 {
+  font-size: 19px;
+  color: var(--vert-fonce);
+  line-height: 1.3;
+}
+
+.groupe-body {
+  padding: 0 28px 28px;
+}
+
+.groupe-body p {
+  font-size: 14px;
+  color: var(--texte-clair);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.groupe-themes strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--texte-clair);
+  margin-bottom: 8px;
+}
+
+.themes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.theme-tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* FONCTIONNEMENT */
+.fonctionnement-section {
+  background: var(--creme-fonce);
+  padding: 80px 0;
+}
+
+.fonct-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.fonct-item {
+  text-align: center;
+  padding: 28px 20px;
+  background: var(--blanc);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.fonct-icon { font-size: 36px; display: block; margin-bottom: 12px; }
+.fonct-item h3 { font-size: 15px; color: var(--vert-fonce); margin-bottom: 8px; }
+.fonct-item p { font-size: 13.5px; color: var(--texte-clair); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .fonct-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .groupes-grid, .fonct-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Sync Hero Images",
+  "description": "Quand une image dans images/hero est modifiée, elle est automatiquement copiée vers frontend/public/images/hero/",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "images/hero/*"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "Copy-Item \"images/hero/*.jpeg\" -Destination \"frontend/public/images/hero/\" -Force; Copy-Item \"images/hero/*.jpg\" -Destination \"frontend/public/images/hero/\" -Force; Copy-Item \"images/hero/*.png\" -Destination \"frontend/public/images/hero/\" -Force"
+  }
+}
