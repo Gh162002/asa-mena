@@ -1,0 +1,47 @@
+## ─── Render Blueprint ─────────────────────────────────────────────────────────
+## Ce fichier configure automatiquement le backend Spring Boot + PostgreSQL sur Render.
+## Documentation : https://render.com/docs/blueprint-spec
+
+services:
+  # ── Backend Spring Boot ──────────────────────────────────────────────────────
+  - type: web
+    name: asa-mena-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /api/actualites
+    envVars:
+      # Render injecte automatiquement ces variables depuis la base de données liée
+      - key: JDBC_DATABASE_URL
+        fromDatabase:
+          name: asa-mena-db
+          property: connectionString
+      - key: JDBC_DATABASE_USERNAME
+        fromDatabase:
+          name: asa-mena-db
+          property: user
+      - key: JDBC_DATABASE_PASSWORD
+        fromDatabase:
+          name: asa-mena-db
+          property: password
+
+      # CORS : remplacer par l'URL de votre frontend Vercel
+      - key: CORS_ORIGINS
+        value: https://asa-mena.vercel.app,http://localhost:5173
+
+      # Email (à remplir dans le dashboard Render, pas ici pour sécurité)
+      - key: MAIL_USERNAME
+        value: fsalliancemena@gmail.com
+      - key: MAIL_PASSWORD
+        sync: false   # sera saisi manuellement dans le dashboard Render
+
+      - key: CONTACT_EMAIL
+        value: fsalliancemena@gmail.com
+
+# ── Base de données PostgreSQL ────────────────────────────────────────────────
+databases:
+  - name: asa-mena-db
+    plan: free
+    databaseName: asamena
+    user: asamena_user

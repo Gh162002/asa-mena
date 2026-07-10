@@ -30,7 +30,7 @@ export default function Footer() {
         </div>
         <div>
           <h4 style={{ fontFamily: 'Playfair Display', marginBottom: '1rem', color: '#f0c97a' }}>Contact</h4>
-          <p style={{ fontSize: '0.85rem', opacity: 0.8, marginBottom: '0.5rem' }}>📧 contact@asa-mena.org</p>
+          <p style={{ fontSize: '0.85rem', opacity: 0.8, marginBottom: '0.5rem' }}>📧 fsalliancemena@gmail.com</p>
           <p style={{ fontSize: '0.85rem', opacity: 0.8, marginBottom: '0.5rem' }}>🌍 Région MENA</p>
           <div style={{ marginTop: '1.5rem' }}>
             <Link to="/contact" className="btn-primary" style={{ fontSize: '0.85rem', padding: '0.6rem 1.5rem' }}>Nous contacter</Link>

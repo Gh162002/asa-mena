@@ -2,8 +2,13 @@ node_modules/
 frontend/node_modules/
 backend/target/
 .env
+.env.local
+.env.production
 *.log
 dist/
 frontend/dist/
 .DS_Store
 Thumbs.db
+
+# Ne jamais committer les secrets
+backend/src/main/resources/application-secrets.properties

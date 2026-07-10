@@ -44,7 +44,7 @@ export default function Contact() {
               L'Alliance est un espace ouvert et inclusif. Que vous soyez une organisation de la société civile, un mouvement paysan, un·e chercheur·e ou un individu engagé, n'hésitez pas à nous contacter.
             </p>
             {[
-              ['📧', 'Email', 'contact@asa-mena.org'],
+              ['📧', 'Email', 'fsalliancemena@gmail.com'],
               ['🌍', 'Région', 'MENA – 13 pays membres'],
               ['🗣️', 'Langues', 'Arabe · Français · Anglais'],
             ].map(([icon, label, val]) => (
