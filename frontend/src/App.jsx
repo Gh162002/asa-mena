@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Accueil from './pages/Accueil';
 import APropos from './pages/APropos';
-import GroupesTravail from './pages/GroupesTravail';
+import GroupesTravail, { GroupeDetail } from './pages/GroupesTravail';
 import Thematiques from './pages/Thematiques';
 import Activites from './pages/Activites';
 import PaysMembres from './pages/PaysMembres';
@@ -18,6 +18,7 @@ export default function App() {
           <Route path="/" element={<Accueil />} />
           <Route path="/a-propos" element={<APropos />} />
           <Route path="/groupes" element={<GroupesTravail />} />
+          <Route path="/groupes/:slug" element={<GroupeDetail />} />
           <Route path="/thematiques" element={<Thematiques />} />
           <Route path="/activites" element={<Activites />} />
           <Route path="/pays-membres" element={<PaysMembres />} />
