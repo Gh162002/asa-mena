@@ -16,21 +16,27 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
+  // La navbar est transparente (sur image) uniquement sur la page d'accueil ET sans scroll
+  const isHome = location.pathname === '/';
+  const isTransparent = isHome && !scrolled;
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll);
+    // Reset scrolled quand on change de page
+    setScrolled(window.scrollY > 40);
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [location]);
 
   useEffect(() => setMenuOpen(false), [location]);
 
   return (
     <nav style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-      background: scrolled ? 'rgba(250,248,243,0.97)' : 'transparent',
-      boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.08)' : 'none',
+      background: isTransparent ? 'transparent' : 'rgba(250,248,243,0.97)',
+      boxShadow: isTransparent ? 'none' : '0 2px 20px rgba(0,0,0,0.08)',
       transition: 'all 0.3s',
-      backdropFilter: scrolled ? 'blur(8px)' : 'none',
+      backdropFilter: isTransparent ? 'none' : 'blur(8px)',
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 2rem' }}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -43,8 +49,8 @@ export default function Navbar() {
             <img src="/images/logo1.png" alt="Alliance pour la Souveraineté Alimentaire MENA" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div>
-            <div style={{ fontFamily: 'Playfair Display', fontWeight: 700, fontSize: '0.92rem', color: scrolled ? 'var(--brun)' : 'white', lineHeight: 1.3 }}>Alliance pour la Souveraineté</div>
-            <div style={{ fontFamily: 'Playfair Display', fontWeight: 700, fontSize: '0.92rem', color: scrolled ? 'var(--brun)' : 'white', lineHeight: 1.3 }}>Alimentaire <span style={{ color: scrolled ? 'var(--vert)' : '#f0c97a' }}>MENA</span></div>
+            <div style={{ fontFamily: 'Playfair Display', fontWeight: 700, fontSize: '0.92rem', color: isTransparent ? 'white' : 'var(--brun)', lineHeight: 1.3 }}>Alliance pour la Souveraineté</div>
+            <div style={{ fontFamily: 'Playfair Display', fontWeight: 700, fontSize: '0.92rem', color: isTransparent ? 'white' : 'var(--brun)', lineHeight: 1.3 }}>Alimentaire <span style={{ color: isTransparent ? '#f0c97a' : 'var(--vert)' }}>MENA</span></div>
           </div>
         </Link>
 
