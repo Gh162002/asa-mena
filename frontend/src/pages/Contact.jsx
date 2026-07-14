@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
+import axios from 'axios';
 
-const EMAILJS_SERVICE_ID  = 'service_fv6xvmi';
-const EMAILJS_TEMPLATE_ID = 'template_r2g67jo';
-const EMAILJS_PUBLIC_KEY  = 'NXCb03Q4jnHBgaTEV';
+const API_URL = import.meta.env.VITE_API_URL || 'https://asa-mena.onrender.com';
 
 
 const inputBase = { width: '100%', padding: '0.9rem 1.1rem', borderRadius: '10px', border: '1.5px solid #dde2e8', fontSize: '0.95rem', fontFamily: 'Inter, sans-serif', outline: 'none', transition: 'border-color 0.2s, box-shadow 0.2s', boxSizing: 'border-box', background: '#fafafa', color: 'var(--texte)' };
@@ -30,24 +28,16 @@ export default function Contact() {
     setSending(true);
     setStatus(null);
     try {
-      // Envoi via EmailJS (directement depuis le navigateur → Gmail)
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          from_name:    form.nom,
-          from_email:   form.email,
-          organisation: form.organisation || 'Non renseignée',
-          subject:      form.sujet,
-          message:      form.message,
-          reply_to:     form.email,
-        },
-        { publicKey: EMAILJS_PUBLIC_KEY }
-      );
-      setStatus({ type: 'success', msg: 'Votre message a bien été envoyé. Nous vous répondrons dans les plus brefs délais.' });
+      const res = await axios.post(`${API_URL}/api/contact`, {
+        nom:          form.nom,
+        email:        form.email,
+        organisation: form.organisation,
+        sujet:        form.sujet,
+        message:      form.message,
+      });
+      setStatus({ type: 'success', msg: res.data.message || 'Votre message a bien été envoyé. Nous vous répondrons dans les plus brefs délais.' });
       setForm({ nom: '', email: '', organisation: '', sujet: '', message: '' });
-    } catch (err) {
-      console.error('EmailJS error:', err);
+    } catch {
       setStatus({ type: 'error', msg: 'Une erreur est survenue. Veuillez réessayer ou nous écrire directement à fsalliancemena@gmail.com' });
     } finally {
       setSending(false);
