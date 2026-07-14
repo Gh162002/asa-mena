@@ -5,9 +5,9 @@ import emailjs from '@emailjs/browser';
 // Ces valeurs sont publiques (côté client) — elles ne donnent accès qu'à
 // l'envoi d'email, pas à votre compte complet.
 // À récupérer sur https://dashboard.emailjs.com
-const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || 'service_xxxxxxx';
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_xxxxxxx';
-const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || 'xxxxxxxxxxxxxxxxxxxx';
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || 'service_fv6xvmi';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_y8lpjpw';
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || 'NXCb03Q4jnHBgaTEV';
 
 const inputBase = { width: '100%', padding: '0.9rem 1.1rem', borderRadius: '10px', border: '1.5px solid #dde2e8', fontSize: '0.95rem', fontFamily: 'Inter, sans-serif', outline: 'none', transition: 'border-color 0.2s, box-shadow 0.2s', boxSizing: 'border-box', background: '#fafafa', color: 'var(--texte)' };
 const labelStyle = { fontSize: '0.85rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: '0.45rem' };
