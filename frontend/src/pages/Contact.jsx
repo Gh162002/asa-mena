@@ -5,8 +5,6 @@ const EMAILJS_SERVICE_ID  = 'service_fv6xvmi';
 const EMAILJS_TEMPLATE_ID = 'template_r2g67jo';
 const EMAILJS_PUBLIC_KEY  = 'NXCb03Q4jnHBgaTEV';
 
-// Initialiser EmailJS une seule fois
-emailjs.init(EMAILJS_PUBLIC_KEY);
 
 const inputBase = { width: '100%', padding: '0.9rem 1.1rem', borderRadius: '10px', border: '1.5px solid #dde2e8', fontSize: '0.95rem', fontFamily: 'Inter, sans-serif', outline: 'none', transition: 'border-color 0.2s, box-shadow 0.2s', boxSizing: 'border-box', background: '#fafafa', color: 'var(--texte)' };
 const labelStyle = { fontSize: '0.85rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: '0.45rem' };
@@ -43,7 +41,8 @@ export default function Contact() {
           subject:      form.sujet,
           message:      form.message,
           reply_to:     form.email,
-        }
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY }
       );
       setStatus({ type: 'success', msg: 'Votre message a bien été envoyé. Nous vous répondrons dans les plus brefs délais.' });
       setForm({ nom: '', email: '', organisation: '', sujet: '', message: '' });
