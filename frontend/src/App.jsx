@@ -5,7 +5,7 @@ import Accueil from './pages/Accueil';
 import APropos from './pages/APropos';
 import GroupesTravail, { GroupeDetail } from './pages/GroupesTravail';
 import Thematiques from './pages/Thematiques';
-import Activites from './pages/Activites';
+import Activites, { ActiviteDetail } from './pages/Activites';
 import PaysMembres from './pages/PaysMembres';
 import Contact from './pages/Contact';
 
@@ -21,6 +21,7 @@ export default function App() {
           <Route path="/groupes/:slug" element={<GroupeDetail />} />
           <Route path="/thematiques" element={<Thematiques />} />
           <Route path="/activites" element={<Activites />} />
+          <Route path="/activites/:id" element={<ActiviteDetail />} />
           <Route path="/pays-membres" element={<PaysMembres />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
