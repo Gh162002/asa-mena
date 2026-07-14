@@ -1,103 +1,110 @@
+import { useState, useEffect, useRef } from 'react';
 import { paysMembers } from '../data/content';
 import { Link } from 'react-router-dom';
 
 const paysTries = [...paysMembers].sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
 
-export default function PaysMembres() {
-  return (
-    <div style={{ paddingTop: '80px', background: '#f9f7f4' }}>
+function useCounter(target, duration = 1800, startTrigger = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!startTrigger) return;
+    let start = null;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      setCount(Math.floor(progress * target));
+      if (progress < 1) requestAnimationFrame(step);
+      else setCount(target);
+    };
+    requestAnimationFrame(step);
+  }, [startTrigger, target, duration]);
+  return count;
+}
 
-      {/* Header */}
-      <section style={{ background: 'linear-gradient(135deg, #2d5a3d, #1e3d2a)', padding: '4rem 0', color: 'white' }}>
-        <div className="container">
-          <div style={{ display: 'inline-block', background: 'rgba(255,255,255,0.12)', padding: '0.3rem 1rem', borderRadius: '20px', fontSize: '0.78rem', marginBottom: '1rem' }}>
-            Notre réseau
+function FlagCard({ pays }) {
+  const [imgError, setImgError] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', padding: '1.25rem 0.75rem', borderRadius: '16px', background: hovered ? 'white' : 'transparent', boxShadow: hovered ? '0 8px 32px rgba(61,107,79,0.15)' : 'none', transform: hovered ? 'translateY(-4px)' : 'none', transition: 'all 0.22s ease', cursor: 'default' }}>
+      {imgError ? (
+        <span style={{ fontSize: '3.5rem', lineHeight: 1 }}>{pays.emoji}</span>
+      ) : (
+        <img src={`https://flagcdn.com/w160/${pays.code}.png`} alt={pays.nom} onError={() => setImgError(true)} style={{ width: 120, height: 80, objectFit: 'cover', borderRadius: '10px', boxShadow: hovered ? '0 6px 20px rgba(0,0,0,0.2)' : '0 2px 10px rgba(0,0,0,0.12)', border: '2px solid white', transition: 'box-shadow 0.22s' }} />
+      )}
+      <span style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--brun)', textAlign: 'center', lineHeight: 1.3 }}>{pays.nom}</span>
+    </div>
+  );
+}
+
+export default function PaysMembres() {
+  const [triggered, setTriggered] = useState(false);
+  const heroRef = useRef(null);
+  const count = useCounter(13, 1600, triggered);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setTriggered(true); obs.disconnect(); }
+    }, { threshold: 0.3 });
+    if (heroRef.current) obs.observe(heroRef.current);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div style={{ paddingTop: '80px', background: 'var(--blanc)' }}>
+
+      {/* ── HERO ── */}
+      <section ref={heroRef} style={{ position: 'relative', background: 'linear-gradient(135deg, #1a3326 0%, #2d5a3d 55%, #3d6b4f 100%)', padding: '6rem 0 5rem', color: 'white', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '-80px', right: '-80px', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(200,147,58,0.18) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: '-60px', left: '-60px', width: '320px', height: '320px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(90,143,110,0.25) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(255,255,255,0.07) 1.5px, transparent 1.5px)', backgroundSize: '28px 28px', pointerEvents: 'none' }} />
+
+        <div className="container" style={{ position: 'relative', textAlign: 'center' }}>
+          <div style={{ display: 'inline-block', background: 'rgba(200,147,58,0.25)', border: '1px solid rgba(200,147,58,0.4)', color: '#f5d08a', padding: '0.35rem 1.1rem', borderRadius: '20px', fontSize: '0.78rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '2rem' }}>Notre réseau</div>
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+            <span style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(4rem,12vw,7rem)', lineHeight: 1, color: 'white', fontWeight: 700 }}>{count}</span>
+            <span style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(2rem,5vw,3.5rem)', color: 'rgba(255,255,255,0.7)' }}>pays</span>
           </div>
-          <h1 style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(1.8rem,4vw,2.8rem)', marginBottom: '0.75rem' }}>
-            Pays membres
-          </h1>
-          <p style={{ opacity: 0.8, maxWidth: 560, lineHeight: 1.8, fontSize: '0.95rem' }}>
-            13 pays de la région MENA, unis pour la souveraineté alimentaire.
-          </p>
+          <h1 style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(1.5rem,3.5vw,2.4rem)', marginBottom: '1rem', opacity: 0.95 }}>membres de l'Alliance</h1>
+          <p style={{ opacity: 0.78, maxWidth: 520, lineHeight: 1.85, fontSize: '1rem', margin: '0 auto' }}>13 pays de la région MENA, unis pour la souveraineté alimentaire.</p>
         </div>
       </section>
 
-      {/* Drapeaux */}
+      {/* Wave */}
+      <div style={{ lineHeight: 0, background: '#1a3326' }}>
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', width: '100%' }}>
+          <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="var(--blanc)" />
+        </svg>
+      </div>
+
+      {/* ── PAYS GRID ── */}
       <section style={{ padding: '5rem 0' }}>
         <div className="container">
-          {/* Ligne 1 — 7 pays */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', marginBottom: '3rem' }}>
-            {paysTries.slice(0, 7).map(p => (
-              <div key={p.nom} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
-                <img
-                  src={`https://flagcdn.com/w160/${p.code}.png`}
-                  alt={p.nom}
-                  style={{
-                    width: 120,
-                    height: 80,
-                    objectFit: 'cover',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
-                    border: '2px solid #fff',
-                    transition: 'transform 0.2s, box-shadow 0.2s',
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.22)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)'; }}
-                  onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }}
-                />
-                <span style={{ display: 'none', fontSize: '3rem' }}>{p.emoji}</span>
-                <span style={{ fontWeight: 600, fontSize: '0.85rem', color: '#2d2016', textAlign: 'center' }}>{p.nom}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Ligne 2 — 6 pays */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap' }}>
-            {paysTries.slice(7, 13).map(p => (
-              <div key={p.nom} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
-                <img
-                  src={`https://flagcdn.com/w160/${p.code}.png`}
-                  alt={p.nom}
-                  style={{
-                    width: 120,
-                    height: 80,
-                    objectFit: 'cover',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
-                    border: '2px solid #fff',
-                    transition: 'transform 0.2s, box-shadow 0.2s',
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.22)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)'; }}
-                  onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }}
-                />
-                <span style={{ display: 'none', fontSize: '3rem' }}>{p.emoji}</span>
-                <span style={{ fontWeight: 600, fontSize: '0.85rem', color: '#2d2016', textAlign: 'center' }}>{p.nom}</span>
-              </div>
-            ))}
+          <h2 style={{ fontFamily: 'Playfair Display', fontSize: '2rem', color: 'var(--brun)', textAlign: 'center', marginBottom: '0.5rem' }}>Les pays membres</h2>
+          <div style={{ width: 60, height: 3, background: 'var(--ocre)', borderRadius: 2, margin: '0.6rem auto 3rem' }} />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1.75rem', maxWidth: 1000, margin: '0 auto' }}>
+            {paysTries.map(p => <FlagCard key={p.nom} pays={p} />)}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section style={{ padding: '0 0 5rem' }}>
-        <div className="container" style={{ maxWidth: 580, textAlign: 'center' }}>
-          <div style={{ padding: '2.5rem', background: 'white', borderRadius: '16px', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', border: '1px solid #ede9e3' }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🌍</div>
-            <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.5rem', color: '#3d2e1e', marginBottom: '0.75rem' }}>
-              Rejoindre l'Alliance
-            </h2>
-            <p style={{ color: '#6b7280', lineHeight: 1.8, marginBottom: '1.5rem', fontSize: '0.9rem' }}>
-              L'Alliance est ouverte à toute organisation engagée pour la souveraineté alimentaire dans la région MENA.
-              <br />Arabe · Français · Anglais.
-            </p>
-            <Link to="/contact" className="btn-primary" style={{ fontSize: '0.95rem', padding: '0.75rem 2rem' }}>
-              Prendre contact
-            </Link>
+      {/* Wave */}
+      <div style={{ lineHeight: 0, background: 'var(--blanc)' }}>
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block', width: '100%' }}>
+          <path d="M0,20 C480,60 960,0 1440,30 L1440,60 L0,60 Z" fill="var(--vert-pale)" />
+        </svg>
+      </div>
+
+      {/* ── CTA ── */}
+      <section style={{ background: 'var(--vert-pale)', padding: '5rem 0 6rem' }}>
+        <div className="container" style={{ maxWidth: 640, textAlign: 'center' }}>
+          <div style={{ background: 'white', borderRadius: '20px', padding: '3rem 3.5rem', boxShadow: '0 4px 32px rgba(61,107,79,0.12)', border: '1px solid rgba(61,107,79,0.1)' }}>
+            <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🌍</div>
+            <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.8rem', color: 'var(--brun)', marginBottom: '1rem' }}>Rejoindre l'Alliance</h2>
+            <p style={{ color: 'var(--gris)', lineHeight: 1.85, marginBottom: '2rem', fontSize: '0.97rem' }}>L'Alliance est ouverte à toute organisation engagée pour la souveraineté alimentaire dans la région MENA. Travaillons ensemble, en arabe, en français et en anglais.</p>
+            <Link to="/contact" className="btn-primary" style={{ fontSize: '1rem', padding: '0.9rem 2.5rem', borderRadius: '8px' }}>Prendre contact</Link>
           </div>
         </div>
       </section>
-
     </div>
   );
 }
