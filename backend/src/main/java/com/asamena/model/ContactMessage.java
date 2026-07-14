@@ -16,7 +16,7 @@ public class ContactMessage {
     @NotBlank private String nom;
     @NotBlank @Email private String email;
     @NotBlank private String sujet;
-    @NotBlank @Size(min=10) private String message;
+    @NotBlank @Size(min=2) private String message;
     private String organisation;
     private LocalDateTime dateEnvoi = LocalDateTime.now();
 }
