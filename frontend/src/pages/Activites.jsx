@@ -2,14 +2,15 @@ import { activitesTypes, activitesData } from '../data/content';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 
 const CATEGORIE_COULEUR = {
-  'Publication':  { bg: '#e8f0ff', color: '#3a5bb5' },
-  'Formation':    { bg: '#e8f7ef', color: '#2d7d52' },
-  'Plaidoyer':    { bg: '#fff4e0', color: '#b8691a' },
-  'Recherche':    { bg: '#f3e8ff', color: '#7b3fa0' },
-  'Mobilisation': { bg: '#fde8e8', color: '#b83232' },
-  'Campagne':     { bg: '#e8fdf5', color: '#1a8a6e' },
+  'Publication':  { bg: '#eaf3ec', color: '#3d6b4f' },   // vert
+  'Formation':    { bg: '#eaf3ec', color: '#5a8f6e' },   // vert-clair
+  'Plaidoyer':    { bg: '#fdf3e3', color: '#c8933a' },   // ocre
+  'Recherche':    { bg: '#f5ede3', color: '#5c3d1e' },   // brun
+  'Terrain':      { bg: '#fdf3e3', color: '#a0722a' },   // ocre foncé
+  'Mobilisation': { bg: '#f0ebe0', color: '#7a5c2e' },   // ocre sombre
+  'Campagne':     { bg: '#eaf3ec', color: '#3d6b4f' },   // vert
 };
-const defaultCouleur = { bg: '#f0f0f0', color: '#555' };
+const defaultCouleur = { bg: '#f3f4f6', color: '#6b7280' };
 
 function badgeStyle(cat) {
   const c = CATEGORIE_COULEUR[cat] || defaultCouleur;
@@ -46,7 +47,7 @@ export default function Activites() {
       </section>
 
       {/* Types d'activités */}
-      <section style={{ padding: '4.5rem 0', background: 'var(--creme)' }}>
+      <section style={{ padding: '4.5rem 0', background: 'var(--blanc)' }}>
         <div className="container">
           <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.7rem', color: 'var(--brun)', marginBottom: '0.5rem', textAlign: 'center' }}>
             Nos types d'activités
@@ -65,7 +66,7 @@ export default function Activites() {
       </section>
 
       {/* Activités récentes */}
-      <section style={{ padding: '4.5rem 0 5rem', background: '#faf8f3' }}>
+      <section style={{ padding: '4.5rem 0 5rem', background: 'var(--ocre-pale)' }}>
         <div className="container">
           <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.7rem', color: 'var(--brun)', marginBottom: '0.5rem', textAlign: 'center' }}>
             Activités récentes
@@ -78,6 +79,7 @@ export default function Activites() {
           <div style={{ display: 'grid', gap: '1.25rem' }}>
             {activites.map(a => {
               const c = CATEGORIE_COULEUR[a.categorie] || defaultCouleur;
+              // Si PDF disponible → clic ouvre la page détail (qui contient le viewer)
               return (
                 <Link key={a.id} to={`/activites/${a.id}`} style={{ textDecoration: 'none' }}>
                   <div style={{
@@ -96,11 +98,6 @@ export default function Activites() {
                       <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
                         <span style={badgeStyle(a.categorie)}>{a.categorie}</span>
                         <span style={{ color: 'var(--gris)', fontSize: '0.8rem' }}>📍 {a.lieu}</span>
-                        {a.langue && (
-                          <span style={{ fontSize: '0.72rem', color: 'var(--texte-clair)', background: '#f0f0f0', padding: '2px 8px', borderRadius: '10px' }}>
-                            🌐 {a.langue.split(',').map(l => ({ ar: 'AR', fr: 'FR', en: 'EN' })[l] || l).join(' · ')}
-                          </span>
-                        )}
                       </div>
                       <h3 style={{ fontFamily: 'Playfair Display', fontSize: '1.2rem', color: 'var(--brun)', marginBottom: '0.6rem', lineHeight: 1.35 }}>
                         {a.titre}
@@ -108,22 +105,23 @@ export default function Activites() {
                       <p style={{ color: 'var(--gris)', fontSize: '0.9rem', lineHeight: 1.8, marginBottom: '0.75rem' }}>
                         {a.description}
                       </p>
-                      {a.resultats && (
-                        <div style={{ background: '#e8f7ef', padding: '0.6rem 1rem', borderRadius: '6px', fontSize: '0.83rem', color: '#2d7d52' }}>
-                          ✅ <strong>Résultats :</strong> {a.resultats}
-                        </div>
-                      )}
                       <div style={{ marginTop: '0.75rem', fontSize: '0.78rem', color: 'var(--gris)', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                         {a.thematiques && <span>🏷️ {a.thematiques}</span>}
                         {a.groupesImpliques && <span>👥 {a.groupesImpliques}</span>}
                       </div>
                     </div>
-                    <div style={{ textAlign: 'right', minWidth: 90, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
+                    <div style={{ textAlign: 'right', minWidth: 110, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
                       <div style={{ background: c.color, color: 'white', borderRadius: '8px', padding: '0.45rem 0.75rem', fontSize: '0.82rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
                         {new Date(a.date).toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' })}
                       </div>
-                      {a.contenuComplet && (
-                        <span style={{ fontSize: '0.75rem', color: c.color, fontWeight: 600 }}>Lire →</span>
+                      {a.pdfUrl && (
+                        <span style={{
+                          fontSize: '0.78rem', color: c.color, fontWeight: 700,
+                          background: `${c.color}12`, border: `1px solid ${c.color}44`,
+                          padding: '3px 10px', borderRadius: '6px',
+                        }}>
+                          📄 Lire →
+                        </span>
                       )}
                     </div>
                   </div>
@@ -187,7 +185,6 @@ export function ActiviteDetail() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', marginTop: '1.25rem', fontSize: '0.85rem', opacity: 0.92 }}>
             <span>📅 {new Date(activite.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
             <span>📍 {activite.lieu}</span>
-            {activite.langue && <span>🌐 {activite.langue.split(',').map(l => ({ ar: 'Arabe', fr: 'Français', en: 'Anglais' })[l] || l).join(' · ')}</span>}
             {activite.groupesImpliques && <span>👥 {activite.groupesImpliques}</span>}
           </div>
         </div>
@@ -197,42 +194,65 @@ export function ActiviteDetail() {
       <section style={{ padding: '4rem 0', background: 'var(--creme)' }}>
         <div className="container" style={{ maxWidth: 820 }}>
 
-          {/* Contexte */}
-          {activite.contexte && (
-            <div style={{ background: 'white', borderRadius: '12px', padding: '2rem 2.5rem', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', borderLeft: `5px solid ${c.color}`, marginBottom: '1.75rem' }}>
-              <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.2rem', color: 'var(--brun)', marginBottom: '0.75rem' }}>Contexte</h2>
-              <p style={{ fontSize: '0.97rem', lineHeight: 1.85, color: 'var(--texte-clair)' }}>{activite.contexte}</p>
-            </div>
-          )}
-
           {/* Description */}
           <div style={{ background: 'white', borderRadius: '12px', padding: '2rem 2.5rem', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', marginBottom: '1.75rem' }}>
             <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.2rem', color: 'var(--brun)', marginBottom: '0.75rem' }}>Description</h2>
             <p style={{ fontSize: '0.97rem', lineHeight: 1.85, color: 'var(--texte)' }}>{activite.description}</p>
           </div>
 
-          {/* Texte complet */}
-          {activite.contenuComplet && (
+          {/* ── Viewer PDF + téléchargement ── */}
+          {activite.pdfUrl && (
             <div style={{ background: 'white', borderRadius: '12px', padding: '2rem 2.5rem', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', marginBottom: '1.75rem', borderTop: `3px solid ${c.color}` }}>
-              <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.2rem', color: 'var(--brun)', marginBottom: '1.25rem' }}>
-                📄 Texte complet
-              </h2>
-              <div style={{ borderLeft: `3px solid ${c.color}22`, paddingLeft: '1.5rem' }}>
-                {renderContenu(activite.contenuComplet)}
-              </div>
-              {activite.langue && (
-                <div style={{ marginTop: '1.5rem', padding: '0.75rem 1rem', background: '#f8f8f8', borderRadius: '8px', fontSize: '0.82rem', color: 'var(--texte-clair)' }}>
-                  🌐 Ce document est disponible en : <strong>{activite.langue.split(',').map(l => ({ ar: 'Arabe', fr: 'Français', en: 'Anglais' })[l] || l).join(', ')}</strong>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+                <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.2rem', color: 'var(--brun)', margin: 0 }}>
+                  📄 Document PDF
+                </h2>
+                <div style={{ display: 'flex', gap: '0.75rem' }}>
+                  <a href={activite.pdfUrl} target="_blank" rel="noopener noreferrer" style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '5px',
+                    padding: '0.5rem 1rem', borderRadius: '8px',
+                    background: `${c.color}18`, color: c.color,
+                    border: `1px solid ${c.color}44`,
+                    fontSize: '0.83rem', fontWeight: 600, textDecoration: 'none',
+                    transition: 'background 0.2s',
+                  }}
+                    onMouseEnter={e => e.currentTarget.style.background = `${c.color}30`}
+                    onMouseLeave={e => e.currentTarget.style.background = `${c.color}18`}
+                  >
+                    🔍 Voir en plein écran
+                  </a>
+                  <a href={activite.pdfUrl} download style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '5px',
+                    padding: '0.5rem 1rem', borderRadius: '8px',
+                    background: c.color, color: 'white',
+                    fontSize: '0.83rem', fontWeight: 600, textDecoration: 'none',
+                    transition: 'opacity 0.2s',
+                  }}
+                    onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                  >
+                    ⬇ Télécharger
+                  </a>
                 </div>
-              )}
-            </div>
-          )}
+              </div>
 
-          {/* Résultats */}
-          {activite.resultats && (
-            <div style={{ background: '#e8f7ef', borderRadius: '12px', padding: '1.5rem 2rem', marginBottom: '1.75rem', border: '1px solid #b8e0c8' }}>
-              <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.1rem', color: '#2d7d52', marginBottom: '0.6rem' }}>✅ Résultats</h2>
-              <p style={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#2d5a3d' }}>{activite.resultats}</p>
+              {/* Iframe PDF viewer */}
+              <div style={{ width: '100%', borderRadius: '8px', overflow: 'hidden', border: '1px solid #e0e0e0' }}>
+                <iframe
+                  src={activite.pdfUrl}
+                  title={activite.titre}
+                  width="100%"
+                  height="600px"
+                  style={{ display: 'block', border: 'none' }}
+                />
+              </div>
+
+              <p style={{ marginTop: '0.75rem', fontSize: '0.78rem', color: 'var(--texte-clair)', textAlign: 'center' }}>
+                Si le document ne s'affiche pas,{' '}
+                <a href={activite.pdfUrl} target="_blank" rel="noopener noreferrer" style={{ color: c.color, fontWeight: 600 }}>
+                  cliquez ici pour l'ouvrir
+                </a>.
+              </p>
             </div>
           )}
 

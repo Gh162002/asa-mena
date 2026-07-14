@@ -24,7 +24,7 @@ export const groupesTravail = [
     description: "Le Groupe Jeunes vise à renforcer la participation et le leadership des jeunes dans les systèmes alimentaires et les processus de gouvernance liés à la souveraineté alimentaire.",
     descriptionComplete: "Le Groupe Jeunes vise à renforcer la participation et le leadership des jeunes dans les systèmes alimentaires et les processus de gouvernance liés à la souveraineté alimentaire. Il favorise l'engagement intergénérationnel, la transmission des savoirs, l'accès à la terre, à l'eau, aux semences et aux opportunités économiques, tout en soutenant les initiatives portées par les jeunes dans les domaines de l'agroécologie, de la mobilisation citoyenne, du plaidoyer et de l'innovation communautaire.",
     themes: ["Agroécologie", "Leadership jeune", "Accès aux ressources", "Plaidoyer", "Innovation communautaire"],
-    images: [],
+    images: ["/images/groupes/jeunes-1.jpeg", "/images/groupes/jeunes-2.jpeg"],
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ export const groupesTravail = [
     description: "Le Groupe Femmes œuvre pour renforcer le rôle, la représentation et le pouvoir décisionnel des femmes dans les systèmes alimentaires, la gestion des ressources naturelles et les espaces de gouvernance.",
     descriptionComplete: "Le Groupe Femmes œuvre pour renforcer le rôle, la représentation et le pouvoir décisionnel des femmes dans les systèmes alimentaires, la gestion des ressources naturelles et les espaces de gouvernance. Il travaille sur les droits fonciers, l'accès aux ressources productives, la reconnaissance du travail des femmes rurales, la justice climatique, la souveraineté semencière et la promotion d'approches féministes et inclusives dans les politiques agricoles et alimentaires.",
     themes: ["Droits fonciers", "Ressources productives", "Justice climatique", "Souveraineté semencière", "Égalité de genre"],
-    images: [],
+    images: ["/images/groupes/femmes-1.jpeg", "/images/groupes/femmes-2.jpeg", "/images/groupes/femmes-3.jpeg", "/images/groupes/femmes-4.jpeg", "/images/groupes/femmes-5.jpeg"],
   },
   {
     id: 3,
@@ -46,7 +46,7 @@ export const groupesTravail = [
     description: "Le Groupe Recherche soutient la production, la valorisation et la diffusion de connaissances au service de la souveraineté alimentaire.",
     descriptionComplete: "Le Groupe Recherche soutient la production, la valorisation et la diffusion de connaissances au service de la souveraineté alimentaire. Il favorise la recherche participative, la documentation des savoirs locaux, l'analyse des politiques publiques, la collecte de données communautaires et le développement d'arguments scientifiques pour renforcer le plaidoyer sur les questions liées à la terre, à l'eau, aux semences, à l'agroécologie et aux systèmes alimentaires territorialisés.",
     themes: ["Recherche participative", "Savoirs locaux", "Politiques publiques", "Données communautaires", "Plaidoyer scientifique"],
-    images: [],
+    images: ["/images/groupes/recherche-1.jpeg", "/images/groupes/recherche-2.jpeg", "/images/groupes/recherche-3.jpeg", "/images/groupes/recherche-4.jpeg"],
   },
   {
     id: 4,
@@ -57,7 +57,7 @@ export const groupesTravail = [
     description: "Ce groupe rassemble les organisations paysannes, syndicales et les petits producteurs afin de défendre les droits des agriculteurs et renforcer leur capacité d'organisation et d'influence.",
     descriptionComplete: "Ce groupe rassemble les organisations paysannes, syndicales et les petits producteurs afin de défendre les droits des agriculteurs et renforcer leur capacité d'organisation et d'influence. Il travaille sur les droits des producteurs, l'accès aux ressources naturelles, les politiques agricoles, les conditions de travail, les marchés locaux, les systèmes semenciers paysans et la défense des modèles agricoles durables et équitables.",
     themes: ["Droits des producteurs", "Ressources naturelles", "Marchés locaux", "Semences paysannes", "Conditions de travail"],
-    images: [],
+    images: ["/images/groupes/syndicalistes-1.jpeg", "/images/groupes/syndicalistes-2.jpeg", "/images/groupes/syndicalistes-3.jpeg", "/images/groupes/syndicalistes-4.jpeg"],
   },
   {
     id: 5,
@@ -68,7 +68,7 @@ export const groupesTravail = [
     description: "Le Groupe Pêche promeut les droits et les intérêts des pêcheurs artisanaux et des communautés côtières.",
     descriptionComplete: "Le Groupe Pêche promeut les droits et les intérêts des pêcheurs artisanaux et des communautés côtières. Il agit pour la protection des ressources aquatiques, l'accès équitable aux zones de pêche, la préservation des savoirs traditionnels, la justice environnementale et la reconnaissance de la pêche artisanale comme pilier essentiel de la souveraineté alimentaire et des économies locales.",
     themes: ["Pêche artisanale", "Ressources aquatiques", "Savoirs traditionnels", "Justice environnementale", "Communautés côtières"],
-    images: [],
+    images: ["/images/groupes/peche-1.jpeg"],
   },
   {
     id: 6,
@@ -79,7 +79,7 @@ export const groupesTravail = [
     description: "Le Groupe Data travaille sur la gouvernance, la souveraineté et la justice des données dans les systèmes alimentaires.",
     descriptionComplete: "Le Groupe Data travaille sur la gouvernance, la souveraineté et la justice des données dans les systèmes alimentaires. Il examine les enjeux liés à la numérisation agricole, à la protection des données communautaires, aux droits sur les données, aux plateformes numériques, aux technologies émergentes et aux risques de concentration du contrôle de l'information. Le groupe soutient également la production et l'utilisation éthique des données au service des communautés et du plaidoyer.",
     themes: ["Gouvernance des données", "Numérisation agricole", "Droits numériques", "Technologies émergentes", "Souveraineté numérique"],
-    images: [],
+    images: ["/images/groupes/data-1.jpeg"],
   },
   {
     id: 7,
@@ -90,7 +90,7 @@ export const groupesTravail = [
     description: "Ce groupe œuvre pour renforcer le rôle des consommateurs et des citoyens dans la transformation des systèmes alimentaires vers des modèles plus sains, équitables et durables.",
     descriptionComplete: "Ce groupe œuvre pour renforcer le rôle des consommateurs et des citoyens dans la transformation des systèmes alimentaires vers des modèles plus sains, équitables et durables. Il travaille sur les enjeux liés à la qualité et à la sécurité alimentaire, à la réduction de l'utilisation des pesticides et des intrants chimiques, à la promotion de pratiques agroécologiques, à la sensibilisation sur les impacts sanitaires et environnementaux des systèmes alimentaires, ainsi qu'au renforcement des liens entre producteurs et consommateurs. Le groupe soutient également le plaidoyer pour des politiques alimentaires favorisant des systèmes de production respectueux de la santé humaine, de l'environnement et des droits des communautés.",
     themes: ["Sécurité alimentaire", "Réduction pesticides", "Agroécologie", "Santé & environnement", "Liens producteurs-consommateurs"],
-    images: [],
+    images: ["/images/groupes/consommateurs-1.jpeg", "/images/groupes/consommateurs-2.jpeg", "/images/groupes/consommateurs-3.jpeg"],
   },
 ];
 
@@ -115,6 +115,7 @@ export const activitesData = [
     langue: "ar,fr,en",
     groupesImpliques: "Groupe Jeunes ASA-MENA",
     thematiques: "Souveraineté alimentaire, Justice climatique, Systèmes alimentaires, Résilience",
+    pdfUrl: "/activites/resilience-groupe-jeunes.pdf",
     description:
       "Le Groupe Jeunes de l'Alliance pour la Souveraineté Alimentaire MENA a produit une lecture critique des systèmes alimentaires et du concept de résilience. Ce texte analyse la situation en Tunisie, dans la région MENA et en Palestine, et appelle à une transformation profonde plutôt qu'à une simple adaptation aux crises.",
     contexte:
@@ -203,6 +204,7 @@ C'est peut-être cela, au fond, la seule résilience qui mérite d'être défend
     langue: "en",
     groupesImpliques: "Groupe Femmes ASA-MENA",
     thematiques: "Souveraineté alimentaire, Droits des femmes, Justice climatique, Terre, Eau, Semences",
+    pdfUrl: "/activites/csipm-intervention-zeinab-dirani-2026.pdf",
     contexte:
       "Dans le contexte de l'escalade militaire de 2026 au Liban, Zeineb Al Dirani de Maskabeh a présenté une intervention au webinaire du CSIPM (Civil Society and Indigenous Peoples' Mechanism) le 31 mars 2026. " +
       "Cette intervention relit la boîte à outils genre et souveraineté alimentaire du CSIPM à partir des réalités territoriales du Liban et de la Palestine — guerre, occupation, écocide et travail de soin.",
@@ -284,6 +286,38 @@ L'information fait partie de la capacité des communautés à trouver de la nour
 *land • water • mobility • care*
 
 — **Zeineb Al Dirani | Maskabeh | Webinaire CSIPM, 31 mars 2026**`,
+  },
+  {
+    id: 3,
+    titre: "Étude de cas — Semences paysannes en Tunisie",
+    date: "2026-02-10",
+    lieu: "Tunisie",
+    categorie: "Terrain",
+    langue: "fr",
+    groupesImpliques: "Groupe Syndicalistes et Petits Agriculteurs, Groupe Recherche",
+    thematiques: "Semences, Souveraineté alimentaire, Savoirs paysans",
+    pdfUrl: "/activites/etude-cas-semence-tunisie.pdf",
+    description:
+      "Étude de cas documentant les pratiques de conservation et d'échange de semences paysannes en Tunisie. Ce travail met en lumière les dynamiques locales de souveraineté semencière face aux pressions de la standardisation et des semences commerciales.",
+    contexte: null,
+    resultats: null,
+    contenuComplet: null,
+  },
+  {
+    id: 4,
+    titre: "Étude de cas — Xinema",
+    date: "2026-03-01",
+    lieu: "Région MENA",
+    categorie: "Recherche",
+    langue: "fr",
+    groupesImpliques: "Groupe Femmes ASA-MENA",
+    thematiques: "Souveraineté alimentaire, Systèmes alimentaires",
+    pdfUrl: "/activites/etude-cas-xinema.pdf",
+    description:
+      "Étude de cas produite dans le cadre des activités de recherche participative de l'Alliance pour la Souveraineté Alimentaire MENA.",
+    contexte: null,
+    resultats: null,
+    contenuComplet: null,
   },
 ];
 
