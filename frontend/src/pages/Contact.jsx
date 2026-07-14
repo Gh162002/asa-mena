@@ -1,7 +1,13 @@
 import { useState } from 'react';
-import axios from 'axios';
+import emailjs from '@emailjs/browser';
 
-const API_URL = `${import.meta.env.VITE_API_URL || ''}`;
+// ─── EmailJS config ────────────────────────────────────────────────────────
+// Ces valeurs sont publiques (côté client) — elles ne donnent accès qu'à
+// l'envoi d'email, pas à votre compte complet.
+// À récupérer sur https://dashboard.emailjs.com
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || 'service_xxxxxxx';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_xxxxxxx';
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || 'xxxxxxxxxxxxxxxxxxxx';
 
 const inputBase = { width: '100%', padding: '0.9rem 1.1rem', borderRadius: '10px', border: '1.5px solid #dde2e8', fontSize: '0.95rem', fontFamily: 'Inter, sans-serif', outline: 'none', transition: 'border-color 0.2s, box-shadow 0.2s', boxSizing: 'border-box', background: '#fafafa', color: 'var(--texte)' };
 const labelStyle = { fontSize: '0.85rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: '0.45rem' };
@@ -27,11 +33,25 @@ export default function Contact() {
     setSending(true);
     setStatus(null);
     try {
-      const res = await axios.post(`${API_URL}/api/contact`, form);
-      setStatus({ type: 'success', msg: res.data.message });
+      // Envoi via EmailJS (directement depuis le navigateur → Gmail)
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:    form.nom,
+          from_email:   form.email,
+          organisation: form.organisation || 'Non renseignée',
+          subject:      form.sujet,
+          message:      form.message,
+          reply_to:     form.email,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus({ type: 'success', msg: 'Votre message a bien été envoyé. Nous vous répondrons dans les plus brefs délais.' });
       setForm({ nom: '', email: '', organisation: '', sujet: '', message: '' });
-    } catch {
-      setStatus({ type: 'error', msg: 'Une erreur est survenue. Veuillez réessayer.' });
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      setStatus({ type: 'error', msg: 'Une erreur est survenue. Veuillez réessayer ou nous écrire directement à fsalliancemena@gmail.com' });
     } finally {
       setSending(false);
     }
