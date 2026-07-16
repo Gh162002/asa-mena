@@ -70,7 +70,7 @@ export default function Accueil() {
             <p style={{ color: 'rgba(255,255,255,0.82)', fontSize: '1.1rem', lineHeight: 1.8, marginBottom: '2.5rem', maxWidth: 580 }}>
               Un cadre collectif ouvert et inclusif qui rassemble des organisations de la société civile, des mouvements paysans et des communautés engagées pour une transformation profonde des systèmes alimentaires.
             </p>
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
               <Link to="/a-propos" className="btn-primary" style={{ background: 'var(--ocre)', fontSize: '1rem', padding: '0.85rem 2rem' }}>
                 Découvrir l'Alliance
               </Link>

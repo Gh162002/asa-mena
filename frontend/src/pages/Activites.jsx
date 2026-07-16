@@ -91,6 +91,7 @@ export default function Activites() {
                     borderLeft: `4px solid ${c.color}`,
                     transition: 'all 0.2s',
                   }}
+                    className="activite-item"
                     onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 24px rgba(0,0,0,0.11)'; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 16px rgba(0,0,0,0.06)'; }}
                   >
@@ -110,7 +111,7 @@ export default function Activites() {
                         {a.groupesImpliques && <span>👥 {a.groupesImpliques}</span>}
                       </div>
                     </div>
-                    <div style={{ textAlign: 'right', minWidth: 110, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
+                    <div className="activite-meta" style={{ textAlign: 'right', minWidth: 110, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
                       <div style={{ background: c.color, color: 'white', borderRadius: '8px', padding: '0.45rem 0.75rem', fontSize: '0.82rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
                         {new Date(a.date).toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' })}
                       </div>
@@ -243,6 +244,7 @@ export function ActiviteDetail() {
                   title={activite.titre}
                   width="100%"
                   height="600px"
+                  className="pdf-iframe"
                   style={{ display: 'block', border: 'none' }}
                 />
               </div>

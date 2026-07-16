@@ -79,6 +79,26 @@ export default function Contact() {
             <div style={{ width: 60, height: 3, background: 'var(--ocre)', borderRadius: 2, marginBottom: '1.75rem' }} />
             <p style={{ color: 'var(--gris)', lineHeight: 1.9, marginBottom: '2.5rem', fontSize: '0.97rem' }}>Que vous soyez une organisation de la société civile, un mouvement paysan, un·e chercheur·e ou un individu engagé, n'hésitez pas à nous contacter.</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/profile.php?id=61584598959077"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1.25rem 1.5rem', borderRadius: '14px', background: '#eef4ff', border: '1px solid #5b8dee22', textDecoration: 'none', transition: 'transform 0.2s, box-shadow 0.2s' }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateX(4px)'; e.currentTarget.style.boxShadow = '0 4px 16px #5b8dee25'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
+              >
+                <div style={{ width: 48, height: 48, borderRadius: '12px', background: '#5b8dee', boxShadow: '0 2px 8px #5b8dee35', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  </svg>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 700, color: '#5b8dee', fontSize: '0.8rem', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.2rem' }}>Facebook</div>
+                  <div style={{ color: 'var(--texte)', fontSize: '0.95rem', fontWeight: 500 }}>Alliance for Food Sovereignty in the Middle East and North Africa</div>
+                </div>
+              </a>
+
               {[
                 { icon: '📧', label: 'Email', val: 'fsalliancemena@gmail.com', color: '#3d6b4f', bg: 'var(--vert-pale)' },
                 { icon: '🌍', label: 'Région', val: 'MENA – 13 pays membres', color: '#c8933a', bg: 'var(--ocre-pale)' },
@@ -105,7 +125,7 @@ export default function Contact() {
             <h3 style={{ fontFamily: 'Playfair Display', fontSize: '1.6rem', color: 'var(--brun)', marginBottom: '0.4rem' }}>Envoyez-nous un message</h3>
             <div style={{ width: 50, height: 3, background: 'var(--ocre)', borderRadius: 2, marginBottom: '2rem' }} />
             <form onSubmit={handleSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="form-row-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <Field label="Nom complet" required>
                   <input name="nom" value={form.nom} onChange={handleChange} required style={inputBase} placeholder="Votre nom" onFocus={focusStyle} onBlur={blurStyle} />
                 </Field>

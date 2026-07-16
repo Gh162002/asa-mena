@@ -3,14 +3,26 @@
 :root {
   --vert: #3d6b4f;
   --vert-clair: #5a8f6e;
+  --vert-fonce: #1a3328;
+  --vert-olive: #4a6741;
   --vert-pale: #eaf3ec;
   --ocre: #c8933a;
+  --ocre-clair: #f5d08a;
   --ocre-pale: #fdf3e3;
   --brun: #5c3d1e;
   --blanc: #faf8f3;
+  --creme: #f7f3ed;
+  --creme-fonce: #ede9e1;
   --gris: #6b7280;
   --gris-clair: #f3f4f6;
   --texte: #1a1a1a;
+  --texte-clair: #6b7280;
+  --bordure: #e5e7eb;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+  --transition: all 0.2s ease;
 }
 
 html { scroll-behavior: smooth; }
@@ -19,6 +31,8 @@ body { font-family: 'Inter', sans-serif; background: var(--blanc); color: var(--
 h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.3; }
 
 a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; height: auto; }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
 
@@ -65,4 +79,134 @@ a { color: inherit; text-decoration: none; }
   background: var(--ocre);
   margin: 0.8rem 0 1.5rem;
   border-radius: 2px;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — Global media queries
+═══════════════════════════════════════════ */
+
+/* Navbar */
+@media (max-width: 900px) {
+  .desktop-nav { display: none !important; }
+  .hamburger { display: block !important; }
+}
+
+/* Navbar logo + brand text */
+@media (max-width: 400px) {
+  .navbar-logo { width: 56px !important; height: 56px !important; }
+  .navbar-brand { font-size: 0.78rem !important; }
+}
+
+/* Container padding réduit sur mobile */
+@media (max-width: 600px) {
+  .container { padding: 0 1rem; }
+}
+
+/* Hero sections */
+@media (max-width: 600px) {
+  .hero-stats { gap: 1.5rem !important; flex-wrap: wrap; }
+  .hero-stats > div { min-width: 80px; }
+}
+
+/* Groupes de travail — liste */
+@media (max-width: 720px) {
+  .groupes-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Groupes de travail — detail grid */
+@media (max-width: 860px) {
+  .detail-grid { grid-template-columns: 1fr !important; }
+  .detail-grid .sticky-sidebar { position: static !important; }
+}
+
+/* Galerie photos dans la page groupe détail */
+@media (max-width: 600px) {
+  .galerie-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .galerie-grid > div {
+    grid-column: span 1 !important;
+  }
+}
+
+/* Activités — liste item (titre + date) */
+@media (max-width: 600px) {
+  .activite-item {
+    grid-template-columns: 1fr !important;
+  }
+  .activite-item .activite-meta {
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left !important;
+  }
+}
+
+/* Activités — iframe PDF */
+@media (max-width: 768px) {
+  .pdf-iframe {
+    height: 400px !important;
+  }
+}
+@media (max-width: 480px) {
+  .pdf-iframe {
+    height: 280px !important;
+  }
+}
+
+/* Contact form — champs Nom + Email côte à côte */
+@media (max-width: 600px) {
+  .form-row-2 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* APropos — Vision/Mission grid */
+@media (max-width: 720px) {
+  .apropos-vm-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Hero breadcrumb + icon layout dans GroupeDetail */
+@media (max-width: 560px) {
+  .groupe-detail-header {
+    grid-template-columns: 1fr !important;
+  }
+  .groupe-icon-large {
+    width: 64px !important;
+    height: 64px !important;
+    font-size: 2rem !important;
+  }
+}
+
+/* PaysMembres — flags grid */
+@media (max-width: 360px) {
+  .flags-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Section padding réduit sur mobile */
+@media (max-width: 600px) {
+  .section-mobile-pad {
+    padding: 3rem 0 !important;
+  }
+  .section-title { font-size: 1.7rem; }
+}
+
+/* Thématiques connexes — columns layout */
+@media (max-width: 640px) {
+  .connected-cols {
+    columns: 1 !important;
+  }
+}
+
+/* Footer */
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
 }

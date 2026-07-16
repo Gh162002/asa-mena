@@ -81,7 +81,7 @@ export default function PaysMembres() {
         <div className="container">
           <h2 style={{ fontFamily: 'Playfair Display', fontSize: '2rem', color: 'var(--brun)', textAlign: 'center', marginBottom: '0.5rem' }}>Les pays membres</h2>
           <div style={{ width: 60, height: 3, background: 'var(--ocre)', borderRadius: 2, margin: '0.6rem auto 3rem' }} />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1.75rem', maxWidth: 1000, margin: '0 auto' }}>
+          <div className="flags-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1.75rem', maxWidth: 1000, margin: '0 auto' }}>
             {paysTries.map(p => <FlagCard key={p.nom} pays={p} />)}
           </div>
         </div>

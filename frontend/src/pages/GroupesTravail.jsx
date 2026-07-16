@@ -31,7 +31,7 @@ export default function GroupesTravail() {
             Des espaces thématiques de mobilisation, d'échange et d'action collective pour la souveraineté alimentaire dans la région MENA.
           </p>
           {/* Compteur */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '3rem', marginTop: '3rem' }}>
+          <div className="hero-stats" style={{ display: 'flex', justifyContent: 'center', gap: '3rem', marginTop: '3rem' }}>
             {[['7', 'Groupes actifs'], ['13', 'Pays membres'], ['5+', 'Thématiques']].map(([v, l]) => (
               <div key={l} style={{ textAlign: 'center' }}>
                 <div style={{ fontFamily: 'Playfair Display', fontSize: '2.2rem', fontWeight: 700, color: '#f0c97a', lineHeight: 1 }}>{v}</div>
@@ -52,7 +52,7 @@ export default function GroupesTravail() {
       {/* ── Grille des groupes ── */}
       <section style={{ padding: '5rem 0 6rem' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '1.75rem' }}>
+          <div className="groupes-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.75rem' }}>
             {groupesTravail.map((g, idx) => (
               <GroupeCard key={g.id} g={g} idx={idx} />
             ))}
@@ -163,9 +163,9 @@ export function GroupeDetail() {
             <span style={{ opacity: 0.7 }}>{groupe.nom}</span>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '2rem', alignItems: 'center', maxWidth: 800 }}>
+          <div className="groupe-detail-header" style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '2rem', alignItems: 'center', maxWidth: 800 }}>
             {/* Icône grande */}
-            <div style={{
+            <div className="groupe-icon-large" style={{
               width: 90, height: 90, borderRadius: '24px',
               background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255,255,255,0.25)',
@@ -233,7 +233,7 @@ export function GroupeDetail() {
                     <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.3rem', color: '#1a1a1a', margin: 0 }}>Galerie photos</h2>
                     <span style={{ marginLeft: 'auto', fontSize: '0.78rem', color: '#9ca3af', fontStyle: 'italic' }}>Cliquez pour agrandir</span>
                   </div>
-                  <div style={{
+                  <div className="galerie-grid" style={{
                     display: 'grid',
                     gridTemplateColumns: groupe.images.length === 1 ? '1fr' : groupe.images.length === 2 ? '1fr 1fr' : 'repeat(3, 1fr)',
                     gap: 10,
@@ -247,7 +247,7 @@ export function GroupeDetail() {
             </div>
 
             {/* ─ Sidebar ─ */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'sticky', top: 100 }}>
+            <div className="sticky-sidebar" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'sticky', top: 100 }}>
 
               {/* Card groupe */}
               <div style={{ borderRadius: '20px', overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.1)' }}>
@@ -298,6 +298,12 @@ export function GroupeDetail() {
       <style>{`
         @media (max-width: 860px) {
           .detail-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 600px) {
+          .galerie-grid { grid-template-columns: 1fr !important; }
+          .galerie-grid > div { grid-column: span 1 !important; aspect-ratio: 4/3 !important; }
+          .groupe-detail-header { grid-template-columns: 1fr !important; }
+          .groupe-icon-large { width: 64px !important; height: 64px !important; font-size: 2rem !important; }
         }
       `}</style>
     </div>

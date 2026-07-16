@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
     <footer style={{ background: 'var(--brun)', color: 'white', marginTop: '5rem' }}>
-      <div className="container" style={{ padding: '3rem 2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2.5rem' }}>
+      <div className="container footer-grid" style={{ padding: '3rem 2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2.5rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
             <img src="/images/logo1.png" alt="AFS – MENA" style={{ width: 50, height: 50, borderRadius: '50%', objectFit: 'cover' }} />

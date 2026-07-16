@@ -40,7 +40,7 @@ export default function Navbar() {
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 2rem' }}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <div style={{
+          <div className="navbar-logo" style={{
             width: 80, height: 80, borderRadius: '50%',
             overflow: 'hidden', flexShrink: 0,
             border: '2px solid var(--vert)',
@@ -48,7 +48,7 @@ export default function Navbar() {
           }}>
             <img src="/images/logo1.png" alt="Alliance pour la Souveraineté Alimentaire MENA" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
-          <div>
+          <div className="navbar-brand">
             <div style={{ fontFamily: 'Playfair Display', fontWeight: 700, fontSize: '0.92rem', color: isTransparent ? 'white' : 'var(--brun)', lineHeight: 1.3 }}>Alliance pour la Souveraineté</div>
             <div style={{ fontFamily: 'Playfair Display', fontWeight: 700, fontSize: '0.92rem', color: isTransparent ? 'white' : 'var(--brun)', lineHeight: 1.3 }}>Alimentaire <span style={{ color: isTransparent ? '#f0c97a' : 'var(--vert)' }}>MENA</span></div>
           </div>

@@ -62,7 +62,7 @@ export default function APropos() {
         <div className="container" style={{ maxWidth: 940 }}>
           <h2 style={{ fontFamily: 'Playfair Display', fontSize: '2.2rem', color: 'var(--brun)', marginBottom: '0.5rem', textAlign: 'center' }}>Vision, Mission et Principes</h2>
           <div style={{ width: 60, height: 3, background: 'var(--ocre)', borderRadius: 2, margin: '0.6rem auto 3rem' }} />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2rem' }}>
+          <div className="apropos-vm-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
             {[
               { icon: '🔭', label: 'Vision', color: 'var(--vert)', bg: 'linear-gradient(135deg, #e6f3ea, #f0f9f2)', texte: "L'Alliance envisage des systèmes alimentaires justes, résilients et durables, fondés sur la souveraineté des peuples. Elle promeut un monde dans lequel les communautés ont un contrôle réel sur leurs systèmes alimentaires, leurs ressources et leurs politiques agricoles, dans le respect de la nature et des principes de justice sociale." },
               { icon: '🎯', label: 'Mission', color: 'var(--ocre)', bg: 'linear-gradient(135deg, #fdf3e3, #fef8ee)', texte: "La mission de l'Alliance est de renforcer l'action collective et la coordination entre les acteurs de terrain et les organisations de la société civile afin de promouvoir la souveraineté alimentaire aux niveaux local, régional et international. Elle vise à soutenir l'autonomisation des communautés, à renforcer les réseaux de solidarité et à influencer les politiques publiques en faveur de systèmes alimentaires équitables et durables." },

@@ -108,7 +108,7 @@ export default function Thematiques() {
         <div className="container">
           <h2 style={{ fontFamily: 'Playfair Display', fontSize: '2.2rem', color: 'var(--brun)', marginBottom: '0.5rem', textAlign: 'center' }}>Thématiques connexes</h2>
           <div style={{ width: 60, height: 3, background: 'var(--ocre)', borderRadius: 2, margin: '0.6rem auto 3rem' }} />
-          <div style={{ columns: '300px 3', gap: '1.5rem' }}>
+          <div className="connected-cols" style={{ columns: '300px 3', gap: '1.5rem' }}>
             {CONNECTED_THEMES.map(s => (
               <div key={s.titre} style={{ background: 'white', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', marginBottom: '1.5rem', breakInside: 'avoid', transition: 'transform 0.2s, box-shadow 0.2s' }}
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 32px rgba(0,0,0,0.1)'; }}
