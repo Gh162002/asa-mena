@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { groupesTravail } from '../data/content';
+import { activitesData } from '../data/content';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 
 /* ═══════════════════════════════════════════════════════════════
@@ -244,6 +245,58 @@ export function GroupeDetail() {
                   </div>
                 </div>
               )}
+
+              {/* ─ Activités liées ─ */}
+              {(() => {
+                const activitesLiees = activitesData.filter(a =>
+                  a.groupeSlug === groupe.slug ||
+                  (Array.isArray(a.groupeSlugs) && a.groupeSlugs.includes(groupe.slug))
+                );
+                if (!activitesLiees.length) return null;
+                return (
+                  <div style={{ background: 'white', borderRadius: '20px', padding: '2.5rem', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1.5rem' }}>
+                      <div style={{ width: 36, height: 36, borderRadius: 10, background: groupe.couleur + '20', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem' }}>📄</div>
+                      <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.3rem', color: '#1a1a1a', margin: 0 }}>Activités liées</h2>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                      {activitesLiees.map(a => (
+                        <Link key={a.id} to={`/activites/${a.id}`} style={{ textDecoration: 'none' }}>
+                          <div style={{
+                            padding: '1rem 1.25rem', borderRadius: '12px',
+                            border: `1.5px solid ${groupe.couleur}22`,
+                            background: groupe.couleur + '08',
+                            transition: 'all 0.2s',
+                          }}
+                            onMouseEnter={e => { e.currentTarget.style.background = groupe.couleur + '18'; e.currentTarget.style.borderColor = groupe.couleur + '55'; }}
+                            onMouseLeave={e => { e.currentTarget.style.background = groupe.couleur + '08'; e.currentTarget.style.borderColor = groupe.couleur + '22'; }}
+                          >
+                            <div style={{ fontSize: '0.68rem', fontWeight: 700, color: groupe.couleur, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.35rem' }}>
+                              {a.categorie} · {new Date(a.date).toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' })}
+                            </div>
+                            <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#1a1a1a', lineHeight: 1.4, marginBottom: '0.35rem' }}>
+                              {a.titre}
+                            </div>
+                            {a.pdfs && (
+                              <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap', marginTop: '0.4rem' }}>
+                                {a.pdfs.map(p => (
+                                  <span key={p.code} style={{ fontSize: '0.68rem', background: groupe.couleur + '18', color: groupe.couleur, padding: '2px 8px', borderRadius: '10px', fontWeight: 600 }}>
+                                    {p.flag} {p.langue}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                            <div style={{ marginTop: '0.5rem', fontSize: '0.78rem', color: groupe.couleur, fontWeight: 700 }}>
+                              Lire →
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
+
             </div>
 
             {/* ─ Sidebar ─ */}

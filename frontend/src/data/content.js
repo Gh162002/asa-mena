@@ -114,6 +114,7 @@ export const activitesData = [
     categorie: "Publication",
     langue: "ar,fr,en",
     groupesImpliques: "Groupe Jeunes ASA-MENA",
+    groupeSlug: "jeunes",
     thematiques: "Souveraineté alimentaire, Justice climatique, Systèmes alimentaires, Résilience",
     pdfUrl: "/activites/resilience-groupe-jeunes.pdf",
     description:
@@ -203,6 +204,7 @@ C'est peut-être cela, au fond, la seule résilience qui mérite d'être défend
     categorie: "Plaidoyer",
     langue: "en",
     groupesImpliques: "Groupe Femmes ASA-MENA",
+    groupeSlug: "femmes",
     thematiques: "Souveraineté alimentaire, Droits des femmes, Justice climatique, Terre, Eau, Semences",
     pdfUrl: "/activites/csipm-intervention-zeinab-dirani-2026.pdf",
     contexte:
@@ -288,6 +290,30 @@ L'information fait partie de la capacité des communautés à trouver de la nour
 — **Zeineb Al Dirani | Maskabeh | Webinaire CSIPM, 31 mars 2026**`,
   },
   {
+    id: 5,
+    titre: "Les données comme nouveau mécanisme de renforcement de l'accumulation et du contrôle économique",
+    date: "2026-07-01",
+    lieu: "Région MENA",
+    categorie: "Publication",
+    langue: "ar,fr,en",
+    groupesImpliques: "Groupe Data ASA-MENA",
+    groupeSlug: "data",
+    thematiques: "Systèmes numériques, Données, Technologies émergentes, Capitalisme numérique, Souveraineté numérique",
+    pdfUrl: "/activites/donnees-mecanisme-fr.pdf",
+    pdfs: [
+      { langue: "Français", code: "fr", url: "/activites/donnees-mecanisme-fr.pdf", flag: "🇫🇷" },
+      { langue: "English", code: "en", url: "/activites/donnees-mecanisme-en.pdf", flag: "🇬🇧" },
+      { langue: "العربية", code: "ar", url: "/activites/donnees-mecanisme-ar.pdf", flag: "🇸🇦" },
+    ],
+    description:
+      "Une analyse critique du rôle croissant des données et des technologies numériques dans l'économie mondiale. Ce document examine comment le capitalisme numérique monopoliste concentre le contrôle de l'infrastructure numérique entre les mains d'un petit nombre de firmes transnationales, reproduisant de nouvelles formes de domination économique et de colonialisme numérique.",
+    contexte:
+      "Dans le cadre des travaux du Groupe Data de l'Alliance, ce document propose une lecture d'économie politique critique des transformations numériques actuelles, en analysant les données comme nouvelle forme de capital et d'accumulation, et en interrogeant les rapports de pouvoir qui structurent l'économie numérique mondiale.",
+    resultats:
+      "Document publié en 3 langues (arabe, français, anglais). Diffusé dans les réseaux de l'Alliance et auprès des organisations membres de la région MENA.",
+    contenuComplet: null,
+  },
+  {
     id: 3,
     titre: "Étude de cas — Semences paysannes en Tunisie",
     date: "2026-02-10",
@@ -295,6 +321,8 @@ L'information fait partie de la capacité des communautés à trouver de la nour
     categorie: "Terrain",
     langue: "fr",
     groupesImpliques: "Groupe Syndicalistes et Petits Agriculteurs, Groupe Recherche",
+    groupeSlug: "syndicalistes",
+    groupeSlugs: ["syndicalistes", "recherche"],
     thematiques: "Semences, Souveraineté alimentaire, Savoirs paysans",
     pdfUrl: "/activites/etude-cas-semence-tunisie.pdf",
     description:
@@ -311,6 +339,7 @@ L'information fait partie de la capacité des communautés à trouver de la nour
     categorie: "Recherche",
     langue: "fr",
     groupesImpliques: "Groupe Femmes ASA-MENA",
+    groupeSlug: "femmes",
     thematiques: "Souveraineté alimentaire, Systèmes alimentaires",
     pdfUrl: "/activites/etude-cas-xinema.pdf",
     description:

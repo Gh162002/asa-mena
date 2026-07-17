@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { activitesTypes, activitesData } from '../data/content';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 
@@ -203,59 +204,62 @@ export function ActiviteDetail() {
 
           {/* ── Viewer PDF + téléchargement ── */}
           {activite.pdfUrl && (
-            <div style={{ background: 'white', borderRadius: '12px', padding: '2rem 2.5rem', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', marginBottom: '1.75rem', borderTop: `3px solid ${c.color}` }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-                <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.2rem', color: 'var(--brun)', margin: 0 }}>
-                  📄 Document PDF
-                </h2>
-                <div style={{ display: 'flex', gap: '0.75rem' }}>
-                  <a href={activite.pdfUrl} target="_blank" rel="noopener noreferrer" style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '5px',
-                    padding: '0.5rem 1rem', borderRadius: '8px',
-                    background: `${c.color}18`, color: c.color,
-                    border: `1px solid ${c.color}44`,
-                    fontSize: '0.83rem', fontWeight: 600, textDecoration: 'none',
-                    transition: 'background 0.2s',
-                  }}
-                    onMouseEnter={e => e.currentTarget.style.background = `${c.color}30`}
-                    onMouseLeave={e => e.currentTarget.style.background = `${c.color}18`}
-                  >
-                    🔍 Voir en plein écran
-                  </a>
-                  <a href={activite.pdfUrl} download style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '5px',
-                    padding: '0.5rem 1rem', borderRadius: '8px',
-                    background: c.color, color: 'white',
-                    fontSize: '0.83rem', fontWeight: 600, textDecoration: 'none',
-                    transition: 'opacity 0.2s',
-                  }}
-                    onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-                  >
-                    ⬇ Télécharger
-                  </a>
+            activite.pdfs ? (
+              /* ── Activité multi-langues : 3 onglets PDF ── */
+              <MultiPdfViewer pdfs={activite.pdfs} couleur={c.color} titre={activite.titre} />
+            ) : (
+              /* ── PDF unique ── */
+              <div style={{ background: 'white', borderRadius: '12px', padding: '2rem 2.5rem', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', marginBottom: '1.75rem', borderTop: `3px solid ${c.color}` }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+                  <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.2rem', color: 'var(--brun)', margin: 0 }}>
+                    📄 Document PDF
+                  </h2>
+                  <div style={{ display: 'flex', gap: '0.75rem' }}>
+                    <a href={activite.pdfUrl} target="_blank" rel="noopener noreferrer" style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '5px',
+                      padding: '0.5rem 1rem', borderRadius: '8px',
+                      background: `${c.color}18`, color: c.color,
+                      border: `1px solid ${c.color}44`,
+                      fontSize: '0.83rem', fontWeight: 600, textDecoration: 'none',
+                      transition: 'background 0.2s',
+                    }}
+                      onMouseEnter={e => e.currentTarget.style.background = `${c.color}30`}
+                      onMouseLeave={e => e.currentTarget.style.background = `${c.color}18`}
+                    >
+                      🔍 Voir en plein écran
+                    </a>
+                    <a href={activite.pdfUrl} download style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '5px',
+                      padding: '0.5rem 1rem', borderRadius: '8px',
+                      background: c.color, color: 'white',
+                      fontSize: '0.83rem', fontWeight: 600, textDecoration: 'none',
+                      transition: 'opacity 0.2s',
+                    }}
+                      onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+                      onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                    >
+                      ⬇ Télécharger
+                    </a>
+                  </div>
                 </div>
+                <div style={{ width: '100%', borderRadius: '8px', overflow: 'hidden', border: '1px solid #e0e0e0' }}>
+                  <iframe
+                    src={activite.pdfUrl}
+                    title={activite.titre}
+                    width="100%"
+                    height="600px"
+                    className="pdf-iframe"
+                    style={{ display: 'block', border: 'none' }}
+                  />
+                </div>
+                <p style={{ marginTop: '0.75rem', fontSize: '0.78rem', color: 'var(--texte-clair)', textAlign: 'center' }}>
+                  Si le document ne s'affiche pas,{' '}
+                  <a href={activite.pdfUrl} target="_blank" rel="noopener noreferrer" style={{ color: c.color, fontWeight: 600 }}>
+                    cliquez ici pour l'ouvrir
+                  </a>.
+                </p>
               </div>
-
-              {/* Iframe PDF viewer */}
-              <div style={{ width: '100%', borderRadius: '8px', overflow: 'hidden', border: '1px solid #e0e0e0' }}>
-                <iframe
-                  src={activite.pdfUrl}
-                  title={activite.titre}
-                  width="100%"
-                  height="600px"
-                  className="pdf-iframe"
-                  style={{ display: 'block', border: 'none' }}
-                />
-              </div>
-
-              <p style={{ marginTop: '0.75rem', fontSize: '0.78rem', color: 'var(--texte-clair)', textAlign: 'center' }}>
-                Si le document ne s'affiche pas,{' '}
-                <a href={activite.pdfUrl} target="_blank" rel="noopener noreferrer" style={{ color: c.color, fontWeight: 600 }}>
-                  cliquez ici pour l'ouvrir
-                </a>.
-              </p>
-            </div>
+            )
           )}
 
           {/* Thématiques */}
@@ -281,6 +285,85 @@ export function ActiviteDetail() {
           </Link>
         </div>
       </section>
+    </div>
+  );
+}
+
+/* ─── Composant multi-PDF (3 langues) ───────────────────────────────────── */
+function MultiPdfViewer({ pdfs, couleur, titre }) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const active = pdfs[activeIdx];
+
+  return (
+    <div style={{ background: 'white', borderRadius: '12px', padding: '2rem 2.5rem', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', marginBottom: '1.75rem', borderTop: `3px solid ${couleur}` }}>
+
+      {/* En-tête */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+        <h2 style={{ fontFamily: 'Playfair Display', fontSize: '1.2rem', color: 'var(--brun)', margin: 0 }}>
+          📄 Documents PDF — 3 langues
+        </h2>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <a href={active.url} target="_blank" rel="noopener noreferrer" style={{
+            display: 'inline-flex', alignItems: 'center', gap: '5px',
+            padding: '0.5rem 1rem', borderRadius: '8px',
+            background: `${couleur}18`, color: couleur,
+            border: `1px solid ${couleur}44`,
+            fontSize: '0.83rem', fontWeight: 600, textDecoration: 'none',
+          }}>
+            🔍 Plein écran
+          </a>
+          <a href={active.url} download style={{
+            display: 'inline-flex', alignItems: 'center', gap: '5px',
+            padding: '0.5rem 1rem', borderRadius: '8px',
+            background: couleur, color: 'white',
+            fontSize: '0.83rem', fontWeight: 600, textDecoration: 'none',
+          }}>
+            ⬇ Télécharger
+          </a>
+        </div>
+      </div>
+
+      {/* Onglets langues */}
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+        {pdfs.map((pdf, i) => (
+          <button
+            key={pdf.code}
+            onClick={() => setActiveIdx(i)}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '6px',
+              padding: '0.55rem 1.25rem', borderRadius: '30px',
+              border: i === activeIdx ? 'none' : `2px solid ${couleur}44`,
+              background: i === activeIdx ? couleur : 'transparent',
+              color: i === activeIdx ? 'white' : couleur,
+              fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer',
+              transition: 'all 0.18s', fontFamily: 'Inter, sans-serif',
+              boxShadow: i === activeIdx ? `0 4px 12px ${couleur}40` : 'none',
+            }}
+          >
+            <span>{pdf.flag}</span> {pdf.langue}
+          </button>
+        ))}
+      </div>
+
+      {/* Viewer PDF */}
+      <div style={{ width: '100%', borderRadius: '8px', overflow: 'hidden', border: '1px solid #e0e0e0' }}>
+        <iframe
+          key={active.url}
+          src={active.url}
+          title={`${titre} — ${active.langue}`}
+          width="100%"
+          height="600px"
+          className="pdf-iframe"
+          style={{ display: 'block', border: 'none' }}
+        />
+      </div>
+
+      <p style={{ marginTop: '0.75rem', fontSize: '0.78rem', color: 'var(--texte-clair)', textAlign: 'center' }}>
+        Si le document ne s'affiche pas,{' '}
+        <a href={active.url} target="_blank" rel="noopener noreferrer" style={{ color: couleur, fontWeight: 600 }}>
+          cliquez ici pour l'ouvrir
+        </a>.
+      </p>
     </div>
   );
 }
