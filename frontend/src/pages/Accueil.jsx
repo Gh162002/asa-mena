@@ -7,6 +7,7 @@ const heroImages = [
   '/images/hero/3.jpeg',
   '/images/hero/4.jpeg',
   '/images/hero/5.jpeg',
+  '/images/Hero/webinar.jpg',
 ];
 
 const stats = [

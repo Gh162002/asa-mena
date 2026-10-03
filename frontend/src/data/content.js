@@ -298,6 +298,7 @@ L'information fait partie de la capacité des communautés à trouver de la nour
     langue: "ar,fr,en",
     groupesImpliques: "Groupe Data ASA-MENA",
     groupeSlug: "data",
+    image: "/images/Hero/webinar.jpg",
     thematiques: "Systèmes numériques, Données, Technologies émergentes, Capitalisme numérique, Souveraineté numérique",
     pdfUrl: "/activites/donnees-mecanisme-fr.pdf",
     pdfs: [

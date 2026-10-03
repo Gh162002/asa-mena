@@ -84,47 +84,62 @@ export default function Activites() {
               return (
                 <Link key={a.id} to={`/activites/${a.id}`} style={{ textDecoration: 'none' }}>
                   <div style={{
-                    background: 'white', borderRadius: '12px', padding: '1.75rem 2rem',
+                    background: 'white', borderRadius: '12px',
                     boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
-                    display: 'grid', gridTemplateColumns: '1fr auto',
-                    gap: '1.5rem', alignItems: 'start',
                     border: '1px solid #e8e8e8',
                     borderLeft: `4px solid ${c.color}`,
                     transition: 'all 0.2s',
+                    overflow: 'hidden',
                   }}
                     className="activite-item"
                     onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 24px rgba(0,0,0,0.11)'; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 16px rgba(0,0,0,0.06)'; }}
                   >
-                    <div>
-                      <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                        <span style={badgeStyle(a.categorie)}>{a.categorie}</span>
-                        <span style={{ color: 'var(--gris)', fontSize: '0.8rem' }}>📍 {a.lieu}</span>
+                    {/* Image optionnelle en haut de la carte */}
+                    {a.image && (
+                      <div style={{ height: 200, overflow: 'hidden', position: 'relative' }}>
+                        <img src={a.image} alt={a.titre} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block', transition: 'transform 0.4s ease' }}
+                          onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.04)'}
+                          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                        />
+                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.18) 100%)' }} />
                       </div>
-                      <h3 style={{ fontFamily: 'Playfair Display', fontSize: '1.2rem', color: 'var(--brun)', marginBottom: '0.6rem', lineHeight: 1.35 }}>
-                        {a.titre}
-                      </h3>
-                      <p style={{ color: 'var(--gris)', fontSize: '0.9rem', lineHeight: 1.8, marginBottom: '0.75rem' }}>
-                        {a.description}
-                      </p>
-                      <div style={{ marginTop: '0.75rem', fontSize: '0.78rem', color: 'var(--gris)', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                        {a.thematiques && <span>🏷️ {a.thematiques}</span>}
-                        {a.groupesImpliques && <span>👥 {a.groupesImpliques}</span>}
+                    )}
+                    <div style={{
+                      padding: '1.75rem 2rem',
+                      display: 'grid', gridTemplateColumns: '1fr auto',
+                      gap: '1.5rem', alignItems: 'start',
+                    }}>
+                      <div>
+                        <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                          <span style={badgeStyle(a.categorie)}>{a.categorie}</span>
+                          <span style={{ color: 'var(--gris)', fontSize: '0.8rem' }}>📍 {a.lieu}</span>
+                        </div>
+                        <h3 style={{ fontFamily: 'Playfair Display', fontSize: '1.2rem', color: 'var(--brun)', marginBottom: '0.6rem', lineHeight: 1.35 }}>
+                          {a.titre}
+                        </h3>
+                        <p style={{ color: 'var(--gris)', fontSize: '0.9rem', lineHeight: 1.8, marginBottom: '0.75rem' }}>
+                          {a.description}
+                        </p>
+                        <div style={{ marginTop: '0.75rem', fontSize: '0.78rem', color: 'var(--gris)', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                          {a.thematiques && <span>🏷️ {a.thematiques}</span>}
+                          {a.groupesImpliques && <span>👥 {a.groupesImpliques}</span>}
+                        </div>
                       </div>
-                    </div>
-                    <div className="activite-meta" style={{ textAlign: 'right', minWidth: 110, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
-                      <div style={{ background: c.color, color: 'white', borderRadius: '8px', padding: '0.45rem 0.75rem', fontSize: '0.82rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
-                        {new Date(a.date).toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' })}
+                      <div className="activite-meta" style={{ textAlign: 'right', minWidth: 110, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
+                        <div style={{ background: c.color, color: 'white', borderRadius: '8px', padding: '0.45rem 0.75rem', fontSize: '0.82rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                          {new Date(a.date).toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' })}
+                        </div>
+                        {a.pdfUrl && (
+                          <span style={{
+                            fontSize: '0.78rem', color: c.color, fontWeight: 700,
+                            background: `${c.color}12`, border: `1px solid ${c.color}44`,
+                            padding: '3px 10px', borderRadius: '6px',
+                          }}>
+                            📄 Lire →
+                          </span>
+                        )}
                       </div>
-                      {a.pdfUrl && (
-                        <span style={{
-                          fontSize: '0.78rem', color: c.color, fontWeight: 700,
-                          background: `${c.color}12`, border: `1px solid ${c.color}44`,
-                          padding: '3px 10px', borderRadius: '6px',
-                        }}>
-                          📄 Lire →
-                        </span>
-                      )}
                     </div>
                   </div>
                 </Link>
