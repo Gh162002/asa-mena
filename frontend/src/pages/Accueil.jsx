@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 const heroImages = [
-  '/images/hero/1.jpeg',
-  '/images/hero/2.jpeg',
-  '/images/hero/3.jpeg',
-  '/images/hero/4.jpeg',
-  '/images/hero/5.jpeg',
-  '/images/Hero/webinar.jpg',
+  { src: '/images/hero/1.jpeg', position: 'center' },
+  { src: '/images/hero/2.jpeg', position: 'center' },
+  { src: '/images/hero/3.jpeg', position: 'center' },
+  { src: '/images/hero/4.jpeg', position: 'center' },
+  { src: '/images/hero/5.jpeg', position: 'center' },
+  { src: '/images/webinar.jpg', position: 'top' },
 ];
 
 const stats = [
@@ -38,9 +38,9 @@ export default function Accueil() {
         {heroImages.map((img, i) => (
           <div key={i} style={{
             position: 'absolute', inset: 0,
-            backgroundImage: `url(${img})`,
+            backgroundImage: `url(${img.src})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundPosition: img.position,
             opacity: i === currentImg ? 1 : 0,
             transition: 'opacity 1s ease-in-out',
             zIndex: 0,

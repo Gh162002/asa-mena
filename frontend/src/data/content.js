@@ -298,7 +298,6 @@ L'information fait partie de la capacité des communautés à trouver de la nour
     langue: "ar,fr,en",
     groupesImpliques: "Groupe Data ASA-MENA",
     groupeSlug: "data",
-    image: "/images/Hero/webinar.jpg",
     thematiques: "Systèmes numériques, Données, Technologies émergentes, Capitalisme numérique, Souveraineté numérique",
     pdfUrl: "/activites/donnees-mecanisme-fr.pdf",
     pdfs: [
@@ -346,6 +345,25 @@ L'information fait partie de la capacité des communautés à trouver de la nour
     description:
       "Étude de cas produite dans le cadre des activités de recherche participative de l'Alliance pour la Souveraineté Alimentaire MENA.",
     contexte: null,
+    resultats: null,
+    contenuComplet: null,
+  },
+  {
+    id: 6,
+    titre: "ندوة حول UPOV 1991 — من أجل بذورنا وسيادتنا الغذائية",
+    date: "2026-10-03",
+    lieu: "En ligne (Zoom) — 18h00 heure de Tunis",
+    categorie: "Mobilisation",
+    groupesImpliques: "Alliance pour la Souveraineté Alimentaire MENA",
+    groupeSlug: "syndicalistes",
+    groupeSlugs: ["syndicalistes", "femmes", "jeunes", "recherche"],
+    thematiques: "Semences, Souveraineté alimentaire, Droits des paysans, UPOV",
+    image: "/images/webinar.jpg",
+    pdfUrl: null,
+    description:
+      "Webinaire organisé par l'Alliance pour la Souveraineté Alimentaire MENA sur la convention UPOV 1991 et ses impacts sur les droits des agriculteurs et la souveraineté semencière dans la région MENA. La séance abordera les questions des semences locales, des menaces juridiques et politiques, et des revendications communes des paysans et de la société civile.",
+    contexte:
+      "Face aux pressions croissantes pour l'adoption de l'UPOV 1991 dans plusieurs pays de la région MENA, l'Alliance organise ce webinaire pour réunir organisations paysannes, chercheurs et militants autour des enjeux de la souveraineté semencière.",
     resultats: null,
     contenuComplet: null,
   },

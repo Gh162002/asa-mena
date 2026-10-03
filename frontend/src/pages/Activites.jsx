@@ -217,6 +217,19 @@ export function ActiviteDetail() {
             <p style={{ fontSize: '0.97rem', lineHeight: 1.85, color: 'var(--texte)' }}>{activite.description}</p>
           </div>
 
+          {/* ── Image / Flyer (sans PDF) ── */}
+          {activite.image && !activite.pdfUrl && (
+            <div style={{ background: 'white', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 2px 16px rgba(0,0,0,0.06)', marginBottom: '1.75rem', borderTop: `3px solid ${c.color}` }}>
+              <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
+                <img
+                  src={activite.image}
+                  alt={activite.titre}
+                  style={{ maxWidth: '100%', maxHeight: '85vh', objectFit: 'contain', borderRadius: '8px', boxShadow: '0 4px 24px rgba(0,0,0,0.12)' }}
+                />
+              </div>
+            </div>
+          )}
+
           {/* ── Viewer PDF + téléchargement ── */}
           {activite.pdfUrl && (
             activite.pdfs ? (
